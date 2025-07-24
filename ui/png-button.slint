@@ -1,0 +1,36 @@
+export component PngButton {
+	width: 28px;
+	height: 28px;
+
+	in-out property <string> label: "1";
+	callback png_button_pointer_event(PointerEvent);
+	in property <bool> btn_clicked: false;
+
+	TouchArea {
+		btn_up:= Image {
+			source: @image-url("../theme/sprout-lands/btn_up.png");
+			opacity: 1;
+		}
+		btn_down:= Image {
+			source: @image-url("../theme/sprout-lands/btn_down.png");
+			opacity: 0;
+		}
+
+		Text {
+			text: label;
+			font-size: 70px;
+			y: 64px;
+			color: black;
+		}
+		pointer-event(event) => {
+			root.png_button_pointer_event(event);
+			if (btn_clicked == true) {
+				btn_up.opacity = 0;
+				btn_down.opacity = 1;
+			} else {
+				btn_up.opacity = 1;
+				btn_down.opacity = 0;
+			}
+		}
+	}
+}

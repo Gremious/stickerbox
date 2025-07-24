@@ -1,0 +1,30 @@
+import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox } from "std-widgets.slint";
+import { PngButton } from "png-button.slint";
+
+export component MainWindow inherits Window {
+    title: "Test";
+    preferred-width: 800px;
+    preferred-height: 600px;
+	background: red;
+
+	callback click_button_cb <=> png_btn.png_button_pointer_event;
+	in property <bool> btn_clicked: false;
+
+    HorizontalBox {
+		padding: 0px;
+		spacing: 0px;
+
+		Rectangle {
+			width: 50%;
+			background: blue;
+			png_btn := PngButton {
+				btn_clicked <=> btn_clicked;
+			}
+		}
+
+		Rectangle {
+			width: 50%;
+			background: green;
+		}
+    }
+}
