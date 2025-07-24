@@ -21,6 +21,9 @@ fn main() {
 
 	let window_weak = main_window.as_weak();
 
+	let path = PathBuf::from("./resources/GGST_Potemkin_Potemkin_Buster_Startup.png");
+	main_window.set_test_image(slint::Image::load_from_path(&path).unwrap());
+
 	main_window.on_click_button_cb(move |event| {
 		// println!("Evvent: {event:#?}");
 		if event.button == slint::platform::PointerEventButton::Left {

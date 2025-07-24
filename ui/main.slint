@@ -1,5 +1,5 @@
 import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox } from "std-widgets.slint";
-import { PngButton } from "png-button.slint";
+import { ThemedButton } from "themed-button.slint";
 
 export component MainWindow inherits Window {
     title: "Test";
@@ -10,6 +10,8 @@ export component MainWindow inherits Window {
 	callback click_button_cb <=> png_btn.png_button_pointer_event;
 	in property <bool> btn_clicked: false;
 
+	in property <image> test_image;
+
     HorizontalBox {
 		padding: 0px;
 		spacing: 0px;
@@ -17,7 +19,7 @@ export component MainWindow inherits Window {
 		Rectangle {
 			width: 50%;
 			background: blue;
-			png_btn := PngButton {
+			png_btn := ThemedButton {
 				btn_clicked <=> btn_clicked;
 			}
 		}
@@ -25,6 +27,12 @@ export component MainWindow inherits Window {
 		Rectangle {
 			width: 50%;
 			background: green;
+			Image {
+				width: 100%;
+				height: 100%;
+				source: test_image;
+				image-fit: contain;
+			}
 		}
     }
 }
