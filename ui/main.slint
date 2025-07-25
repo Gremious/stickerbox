@@ -1,4 +1,4 @@
-import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox } from "std-widgets.slint";
+import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox, ScrollView } from "std-widgets.slint";
 import { ThemedButton } from "themed-button.slint";
 
 export component MainWindow inherits Window {
@@ -10,13 +10,15 @@ export component MainWindow inherits Window {
 	callback click_button_cb <=> png_btn.png_button_pointer_event;
 	in property <bool> btn_clicked: false;
 
-	in property <image> test_image;
+	in property <[image]> images;
+	in property <length> scroll_height;
 
     HorizontalBox {
 		padding: 0px;
 		spacing: 0px;
 
 		Rectangle {
+			border-radius: 1px;
 			width: 50%;
 			background: blue;
 			png_btn := ThemedButton {
@@ -27,11 +29,21 @@ export component MainWindow inherits Window {
 		Rectangle {
 			width: 50%;
 			background: green;
-			Image {
-				width: 100%;
-				height: 100%;
-				source: test_image;
-				image-fit: contain;
+			border-width: 1px;
+			border-color: red;
+
+			ScrollView {
+				viewport-height: scroll_height;
+
+				VerticalLayout {
+					spacing: 8px;
+					height: 100%;
+					for image in images : Image {
+						source: image;
+						height: 128px;
+						width: 128px;
+					}
+				}
 			}
 		}
     }
