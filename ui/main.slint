@@ -1,7 +1,7 @@
 import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox, ScrollView, LineEdit, Button, StyleMetrics } from "std-widgets.slint";
 import { ThemedButton } from "themed-button.slint";
 import { SearchBar } from "searchbar.slint";
-import { SettingsBar } from "side_settings_bar.slint";
+import { SettingsBar, SettingsTab } from "side_settings_bar.slint";
 import { ImageDirs } from "menus/image_dirs.slint";
 import { GeneralSettings } from "menus/general.slint";
 
@@ -11,7 +11,8 @@ export component MainWindow inherits Window {
     preferred-height: 600px;
 	default-font-size: 18px;
 
-	in-out property <string> selected_tab;
+	callback tab_selected(SettingsTab);
+	// in-out property <SettingsTab> selected_tab;
 
 	in-out property <string> location;
 	in-out property <string> search_style;
@@ -47,8 +48,8 @@ export component MainWindow inherits Window {
 			spacing: 0px;
 			alignment: stretch;
 
-			SettingsBar {
-				selected_tab <=> selected_tab;
+			settings_bar:= SettingsBar {
+				// selected_tab <=> selected_tab;
 			}
 
 			GeneralSettings {

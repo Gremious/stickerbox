@@ -1,4 +1,4 @@
-use std::{hash::Hash, ops::Deref, path::{Path, PathBuf}, rc::Rc, sync::{atomic::{AtomicU32, Ordering}, Arc}};
+use std::{cell::RefCell, hash::Hash, ops::Deref, path::{Path, PathBuf}, rc::Rc, sync::{atomic::{AtomicU32, Ordering}, Arc, LazyLock, Mutex, RwLock}};
 // use widgets as w;
 use image::ImageEncoder;
 use pariter::IteratorExt;
@@ -17,6 +17,7 @@ slint::include_modules!();
 // - listary has settings in the tray menu, which is a diff window entirely, seperate from the "app"
 // might not be bad idea actually
 
+static CURR_TAB: LazyLock<RwLock<SettingsTab>> = LazyLock::new(|| RwLock::new(SettingsTab::General));
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 enum PathEntry {
@@ -37,8 +38,11 @@ impl Deref for PathEntry {
 // #[tokio::main]
 fn main() {
     let window = MainWindow::new().unwrap();
-	// let window_handle = window.as_weak();
 	let imgs_path = PathBuf::from("./resources/");
+
+	let window_handle = window.as_weak();
+	// window.on_tab_selected(move |tab| window_handle.unwrap().set_selected_tab(tab));
+
 	// window.set_directory_from_search(SharedString::from(imgs_path.to_string_lossy().to_string()));
 	// window.global::<SearchShit>().set_location(SharedString::from(imgs_path.to_string_lossy().to_string()));
 
