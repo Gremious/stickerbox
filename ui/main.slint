@@ -1,6 +1,7 @@
 import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox, ScrollView, LineEdit, Button, StyleMetrics } from "std-widgets.slint";
 import { ThemedButton } from "themed-button.slint";
 import { SearchBar } from "searchbar.slint";
+import { SettingsBar } from "menus/side_settings_bar.slint";
 
 export component MainWindow inherits Window {
     title: "Test";
@@ -41,70 +42,12 @@ export component MainWindow inherits Window {
 			spacing: 0px;
 			alignment: stretch;
 
-			GridLayout {
+			SettingsBar {
 				width: 20%;
-				spacing-vertical: StyleMetrics.layout-spacing;
-				padding-left: StyleMetrics.layout-padding;
-				padding-right: StyleMetrics.layout-padding;
-
-				// background: yellow;
-				Button {
-					text: "General (Autostart, etc.)";
-					col: 1;
-					row: 1;
-					// horizontal-stretch: 100;
-					// vertical-stretch: 0;
-				}
-				Button {
-					text: "Image directories";
-					col: 1;
-					row: 2;
-					// horizontal-stretch: 0;
-					// vertical-stretch: 0;
-				}
-				Button {
-					text: "Edit names/tags";
-					col: 1;
-					row: 3;
-					// horizontal-stretch: 0;
-					// vertical-stretch: 0;
-				}
-				Button {
-					text: "Hotkeys";
-					col: 1;
-					row: 4;
-					// horizontal-stretch: 0;
-					// vertical-stretch: 0;
-				}
-				Rectangle {
-					col: 1;
-					row: 5;
-					height: 100%;
-				}
 			}
-
 			Rectangle {
-				width: 40%;
-				background: blue;
-			}
-
-			Rectangle {
-				width: 40%;
-				background: green;
-
-				ScrollView {
-					viewport-height <=> images_scroll_height;
-
-					VerticalLayout {
-						spacing: 8px;
-						height: 100%;
-						for image in images : Image {
-							source: image;
-							height: 128px;
-							width: 128px;
-						}
-					}
-				}
+				width: 80%;
+				background: red;
 			}
 		}
 	}
