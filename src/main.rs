@@ -41,7 +41,6 @@ fn main() {
 	let imgs_path = PathBuf::from("./resources/");
 
 	let window_handle = window.as_weak();
-	// window.on_tab_selected(move |tab| window_handle.unwrap().set_selected_tab(tab));
 
 	// window.set_directory_from_search(SharedString::from(imgs_path.to_string_lossy().to_string()));
 	// window.global::<SearchShit>().set_location(SharedString::from(imgs_path.to_string_lossy().to_string()));
