@@ -1,0 +1,30 @@
+import { LineEdit, HorizontalBox, ComboBox } from "std-widgets.slint";
+
+export component Search {
+	in-out property <string> location;
+	in-out property <string> search_style;
+
+	HorizontalLayout {
+		spacing: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+
+		LineEdit {
+			horizontal-stretch: 100;
+			horizontal-alignment: center;
+			placeholder-text: "Search🔎";
+			accessible-placeholder-text: "Search";
+			text <=> location;
+		}
+
+		ComboBox {
+			horizontal-stretch: 0;
+			// TODO: Regex
+			model: ["Exact", "Fuzzy"];
+
+			selected(current_value) => {
+				search_style = current_value;
+			}
+		}
+	}
+}

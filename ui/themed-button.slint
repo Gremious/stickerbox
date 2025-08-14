@@ -1,0 +1,40 @@
+export component ThemedButton {
+	width: 28px;
+	height: 28px;
+
+	in-out property <string> label: "1";
+	callback png_button_pointer_event(PointerEvent);
+	in property <bool> btn_clicked: false;
+
+	touch_area:= TouchArea {
+		width: 48px * 2;
+		height: 48px * 2;
+
+		btn_up:= Image {
+			width: 48px * 2;
+			height: 48px * 2;
+			source: @image-url("../theme/sprout-lands/btn_up.png");
+			visible: !touch_area.pressed;
+			image-rendering: pixelated;
+		}
+
+		btn_down:= Image {
+			width: 48px * 2;
+			height: 48px * 2;
+			source: @image-url("../theme/sprout-lands/btn_down.png");
+			visible: touch_area.pressed;
+			image-rendering: pixelated;
+		}
+
+		Text {
+			text: label;
+			font-size: 70px;
+			y: 64px;
+			color: black;
+		}
+
+		pointer-event(event) => {
+			root.png_button_pointer_event(event);
+		}
+	}
+}

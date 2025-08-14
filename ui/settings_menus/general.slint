@@ -1,0 +1,30 @@
+import { ScrollView, Button } from "std-widgets.slint";
+
+export component GeneralSettings {
+
+	in-out property <length> images_scroll_height;
+	in property <[image]> images;
+
+	Rectangle {
+		background: red;
+
+		ScrollView {
+			viewport-height <=> images_scroll_height;
+
+			// TouchArea {
+				// height:100%; width: 100%;
+				// clicked => { }
+			// }
+
+			VerticalLayout {
+				spacing: 8px;
+				height: 100%;
+				for image in images : Image {
+					source: image;
+					height: 128px;
+					width: 128px;
+				}
+			}
+		}
+	}
+}

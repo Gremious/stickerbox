@@ -1,0 +1,68 @@
+import { Button, StyleMetrics } from "std-widgets.slint";
+
+export enum SettingsTab {
+	General,
+	ImgDirs,
+	EditTags,
+	Hotkeys
+}
+
+export component SettingsBar {
+	in-out property <SettingsTab> selected_tab: SettingsTab.General;
+
+	GridLayout {
+		spacing-vertical: StyleMetrics.layout-spacing;
+		padding-left: StyleMetrics.layout-padding;
+		padding-right: StyleMetrics.layout-padding;
+
+		general_btn := Button {
+			text: "General";
+			col: 0;
+			row: 1;
+			horizontal-stretch: 0;
+			vertical-stretch: 0;
+			enabled: selected_tab != SettingsTab.General;
+			clicked => { selected_tab = SettingsTab.General; }
+		}
+
+		Button {
+			text: "Image directories";
+			col: 0;
+			row: 2;
+			horizontal-stretch: 0;
+			vertical-stretch: 0;
+			enabled: selected_tab != SettingsTab.ImgDirs;
+			clicked => { selected_tab = SettingsTab.ImgDirs; }
+		}
+
+		Button {
+			text: "Edit names/tags";
+			col: 0;
+			row: 3;
+			horizontal-stretch: 0;
+			vertical-stretch: 0;
+			enabled: selected_tab != SettingsTab.EditTags;
+
+			clicked => { selected_tab = SettingsTab.EditTags; }
+		}
+
+		Button {
+			text: "Hotkeys";
+			col: 0;
+			row: 4;
+			horizontal-stretch: 0;
+			vertical-stretch: 0;
+			enabled: selected_tab != SettingsTab.Hotkeys;
+
+			clicked => { selected_tab = SettingsTab.Hotkeys; }
+		}
+
+		Rectangle {
+			col: 0;
+			row: 5;
+			height: 100%;
+			horizontal-stretch: 0;
+			vertical-stretch: 0;
+		}
+	}
+}

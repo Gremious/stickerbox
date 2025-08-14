@@ -2,7 +2,8 @@ use std::{cell::RefCell, hash::Hash, ops::Deref, path::{Path, PathBuf}, rc::Rc, 
 // use widgets as w;
 use image::ImageEncoder;
 use pariter::IteratorExt;
-use slint::{ Model, ModelRc, SharedString, VecModel};
+use slint::{ winit_030::{WinitWindowAccessor, WinitWindowEventResult}, Model, ModelRc, SharedString, VecModel};
+use winit::raw_window_handle::HasWindowHandle;
 
 slint::include_modules!();
 
@@ -35,8 +36,9 @@ impl Deref for PathEntry {
     }
 }
 
-// #[tokio::main]
 fn main() {
+	slint::BackendSelector::new().backend_name(String::from("winit")).select().unwrap();
+
     let window = MainWindow::new().unwrap();
 	let imgs_path = PathBuf::from("./resources/");
 
@@ -44,6 +46,13 @@ fn main() {
 
 	// window.set_directory_from_search(SharedString::from(imgs_path.to_string_lossy().to_string()));
 	// window.global::<SearchShit>().set_location(SharedString::from(imgs_path.to_string_lossy().to_string()));
+
+    window.on_show_secondary_window(|| {
+		let secondary_window = SearchPopUp::new().unwrap();
+        secondary_window.show().unwrap();
+    });
+
+	window.invoke_show_secondary_window();
 
     window.run().unwrap();
 }
