@@ -1,6 +1,5 @@
-import { SearchTab } from "./search_tab_bar.slint";
+import { SearchTab, SearchTabBar } from "./search_tab_bar.slint";
 import { VerticalBox, HorizontalBox } from "std-widgets.slint";
-import { SearchTabBar } from "search_tab_bar.slint";
 import { SearchBar } from "search.slint";
 import { StickerSearch } from "./menus/sticker.slint";
 import { Compose } from "./menus/compose.slint";
@@ -12,13 +11,11 @@ export component SearchWindow {
 	height: 100%;
 	in-out property <string> search_style;
 	in-out property <SearchTab> selected_tab;
-
 	callback hello();
 
 	VerticalBox {
 		padding: 0px;
 		spacing: 0px;
-
 
 		HorizontalBox {
 			SearchTabBar {

@@ -11,8 +11,9 @@ export enum SearchTab {
 component SearchTabButton {
 	in-out property <string> text;
 	callback clicked;
+	in-out property enabled <=> btn.enabled;
 
-	Button {
+	btn:= Button {
 		horizontal-stretch: 1;
 		text <=> text;
 		width: 100%;
@@ -42,18 +43,22 @@ export component SearchTabBar {
 
 		SearchTabButton {
 			text: "Sticker";
+			enabled: selected_tab != SearchTab.Sticker;
 			clicked => { selected_tab = SearchTab.Sticker; }
 		}
 		SearchTabButton {
 			text: "TODO: Compose";
+			enabled: selected_tab != SearchTab.Compose;
 			clicked => { selected_tab = SearchTab.Compose; }
 		}
 		SearchTabButton {
 			text: "TODO: Fun Text Type";
+			enabled: selected_tab != SearchTab.FunText;
 			clicked => { selected_tab = SearchTab.FunText; }
 		}
 		SearchTabButton {
 			text: "TODO: Gif Search";
+			enabled: selected_tab != SearchTab.GifSearch;
 			clicked => { selected_tab = SearchTab.GifSearch; }
 		}
 	}

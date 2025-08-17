@@ -1,5 +1,6 @@
 import { SettingsWindow } from "./settings/main.slint";
 import { SearchWindow } from "./search/main.slint";
+import { SearchTab } from "./search/search_tab_bar.slint";
 
 export component SearchWindow inherits Window {
 	title: "Stickerbox Search";
@@ -7,7 +8,27 @@ export component SearchWindow inherits Window {
 	preferred-width: 500px;
 	preferred-height: 400px;
 	// no-frame: true;
-	SearchWindow {}
+
+	forward-focus: tab_hotkey_handler;
+
+	search_window := SearchWindow {}
+
+	tab_hotkey_handler := FocusScope {
+		key-pressed(event) => {
+            if (event.modifiers.control) {
+				if (event.text == "1") {
+					search_window.selected_tab = SearchTab.Sticker;
+				} else if (event.text == "2") {
+					search_window.selected_tab = SearchTab.Compose;
+				} else if (event.text == "3") {
+					search_window.selected_tab = SearchTab.FunText;
+				} else if (event.text == "4") {
+					search_window.selected_tab = SearchTab.GifSearch;
+				};
+            }
+			accept
+		}
+	}
 }
 
 export component SettingsWindow inherits Window {
