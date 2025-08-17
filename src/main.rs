@@ -36,11 +36,31 @@ impl Deref for PathEntry {
     }
 }
 
+// TODO: Re: Global Hotkeys
+// This would technically require going deep into every os' internals and setting hotkeys ourselves
+// They don't like you doing that as that's a security issue (idk if wayland even lets you?)
+// And also: Not actually my job. I should go to e.g. kde to set hotkeys not to the app itself.
+// So:
+// We want a CLI clap interface that does `stickerbox search --gifs`
+// that will either (simpler) just start the box, or b) more efficient but more annoying (communicate with the in-tray stickerbox) and then open the search window
+// You want that on windows? uhh use autohotkey?
 fn main() {
+	simple_logger::SimpleLogger::new()
+		.with_level(log::LevelFilter::Off)
+		.with_module_level("stickerbox", log::LevelFilter::Trace)
+		.init().unwrap();
+
 	slint::BackendSelector::new().backend_name(String::from("winit")).select().unwrap();
 
     let window = MainWindow::new().unwrap();
 	let imgs_path = PathBuf::from("./resources/");
+
+	// std::thread::spawn(move || {
+		// loop {
+			// log::info!("Hey there babs i'm in the future");
+			// std::thread::sleep(std::time::Duration::from_secs(1));
+		// }
+	// });
 
 	let window_handle = window.as_weak();
 
