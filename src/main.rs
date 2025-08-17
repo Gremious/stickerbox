@@ -52,7 +52,7 @@ fn main() {
 
 	slint::BackendSelector::new().backend_name(String::from("winit")).select().unwrap();
 
-    let window = MainWindow::new().unwrap();
+    let window = SettingsWindow::new().unwrap();
 	let imgs_path = PathBuf::from("./resources/");
 
 	// std::thread::spawn(move || {
@@ -68,7 +68,7 @@ fn main() {
 	// window.global::<SearchShit>().set_location(SharedString::from(imgs_path.to_string_lossy().to_string()));
 
     window.on_show_secondary_window(|| {
-		let secondary_window = SearchPopUp::new().unwrap();
+		let secondary_window = SearchWindow::new().unwrap();
         secondary_window.show().unwrap();
     });
 

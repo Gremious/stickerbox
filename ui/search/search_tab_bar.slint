@@ -1,11 +1,34 @@
-import { SearchTabButton } from "tab.slint";
 import { HorizontalBox } from "std-widgets.slint";
+import { Button } from "std-widgets.slint";
 
 export enum SearchTab {
 	Sticker,
 	Compose,
 	FunText,
 	GifSearch,
+}
+
+component SearchTabButton {
+	in-out property <string> text;
+	callback clicked;
+
+	Button {
+		horizontal-stretch: 1;
+		text <=> text;
+		width: 100%;
+		height: 100%;
+		clicked => { clicked (); }
+		// background: purple;
+		// border-width: 1px;
+		// border-color: black;
+
+		// TouchArea {
+			// width: 100%;
+			// height: 100%;
+			// Text { text <=> text; }
+			// clicked => { tab_clicked() }
+		// }
+	}
 }
 
 export component SearchTabBar {

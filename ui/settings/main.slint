@@ -1,0 +1,107 @@
+import { Slider, HorizontalBox, VerticalBox, GroupBox, ComboBox, ScrollView, LineEdit, Button, StyleMetrics } from "std-widgets.slint";
+import { SettingsTab, SettingsBar } from "./side_bar.slint";
+import { SearchBar } from "../search/search.slint";
+import { GeneralSettings } from "./menus/general.slint";
+import { ImageDirs } from "./menus/image_dirs.slint";
+import { EditTags } from "./menus/edit_tags.slint";
+import { Hotkeys } from "./menus/hotkeys.slint";
+
+export component SettingsWindow {
+	width: 100%;
+	height: 100%;
+
+	in-out property <SettingsTab> selected_tab;
+
+	in-out property <string> location;
+	in-out property <string> search_style;
+
+	// in-out property <string> directory_from_search <=> Search.location;
+
+	// callback click_button_cb <=> png_btn.png_button_pointer_event;
+
+	in property <[image]> images;
+	in-out property <length> images_scroll_height;
+
+	VerticalLayout {
+		padding: 0px;
+		spacing: 0px;
+		width: 100%;
+		height: 100%;
+
+		// Search bar
+		Rectangle {
+			height: 10%;
+
+			SearchBar {
+				width: 100%;
+				height: 50%;
+				location <=> location;
+				search_style <=> search_style;
+			}
+		}
+
+		// Double Split
+		HorizontalBox {
+			padding: 0px;
+			spacing: 0px;
+			alignment: stretch;
+
+			SettingsBar { selected_tab <=> selected_tab; }
+
+			Rectangle {
+				GeneralSettings {
+					images <=> images;
+					states [
+						visible when selected_tab == SettingsTab.General: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SettingsTab.General: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				ImageDirs {
+					states [
+						visible when selected_tab == SettingsTab.ImgDirs: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SettingsTab.ImgDirs: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				EditTags {
+					states [
+						visible when selected_tab == SettingsTab.EditTags: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SettingsTab.EditTags: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				Hotkeys {
+					states [
+						visible when selected_tab == SettingsTab.Hotkeys: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SettingsTab.Hotkeys: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+			}
+		}
+	}
+}

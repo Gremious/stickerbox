@@ -1,0 +1,96 @@
+import { SearchTab } from "./search_tab_bar.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { SearchTabBar } from "search_tab_bar.slint";
+import { SearchBar } from "search.slint";
+import { StickerSearch } from "./menus/sticker.slint";
+import { Compose } from "./menus/compose.slint";
+import { FunText } from "./menus/fun_text.slint";
+import { GifSearch } from "./menus/gif_search.slint";
+
+export component SearchWindow {
+	width: 100%;
+	height: 100%;
+	in-out property <string> search_style;
+	in-out property <SearchTab> selected_tab;
+
+	callback hello();
+
+	VerticalBox {
+		padding: 0px;
+		spacing: 0px;
+
+
+		HorizontalBox {
+			SearchTabBar {
+				selected_tab <=> selected_tab;
+			}
+		}
+
+		VerticalBox {
+			// padding: 0px;
+			// spacing: 0px;
+			width: 100%;
+			height: 90%;
+
+			SearchBar {
+				width: 100%;
+				// height: 10%;
+				search_style <=> search_style;
+			}
+
+			Rectangle {
+				StickerSearch {
+					states [
+						visible when selected_tab == SearchTab.Sticker: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SearchTab.Sticker: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				Compose {
+					states [
+						visible when selected_tab == SearchTab.Compose: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SearchTab.Compose: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				FunText {
+					states [
+						visible when selected_tab == SearchTab.FunText: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SearchTab.FunText: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+
+				GifSearch {
+					states [
+						visible when selected_tab == SearchTab.GifSearch: {
+							width: parent.width;
+							height: parent.height;
+						}
+						hidden when selected_tab != SearchTab.GifSearch: {
+							width: -1px;
+							height: -1px;
+						}
+					]
+				}
+			}
+		}
+	}
+}
